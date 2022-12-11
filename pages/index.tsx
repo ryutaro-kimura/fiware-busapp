@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { getGithubId } from "../src/utils/api";
+import { getGithubId, getOrionData } from "../src/utils/api";
 
-export default function Home() {
+type Props = { data: Array<string> };
+
+export default function Home({ ...props }: Props) {
+  getOrionData();
   const [busEntity, setBusEntity] = useState<number>();
   useEffect(() => {
-    // getOrionData;
     getGithubId().then(id => {
       setBusEntity(id);
     });
