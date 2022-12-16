@@ -32,10 +32,16 @@ export const ConvertToNGSIv2Content: React.FC = () => {
   const [after, setAfter] = useState<Array<GtfsAgencyForNGSIv2>>([]);
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit = async (data: Inputs): Promise<void> => {
-    const jsonArr = await csvToJson(data.file[0]);
-    const formattedJsonArr = await gtfsAgencyToNGSIv2(jsonArr);
-    setBefore(jsonArr);
-    setAfter(formattedJsonArr);
+    if (data.file.length) {
+      const jsonArr = await csvToJson(data.file[0]);
+      const formattedJsonArr = await gtfsAgencyToNGSIv2(jsonArr);
+      console.log("before", jsonArr);
+      console.log("after", formattedJsonArr);
+      setBefore(jsonArr);
+      setAfter(formattedJsonArr);
+    } else {
+      console.log("ファイルなし");
+    }
   };
 
   const csvToJson = async (file: File): Promise<Array<GtfsAgency>> => {
@@ -45,7 +51,6 @@ export const ConvertToNGSIv2Content: React.FC = () => {
         skipEmptyLines: true,
         complete: results => {
           // console.log("hoge", Object.prototype.toString.call(results?.data));
-          console.log(results?.data);
           resolve(results?.data);
         },
         error: error => {
@@ -59,7 +64,6 @@ export const ConvertToNGSIv2Content: React.FC = () => {
   const gtfsAgencyToNGSIv2 = async (
     jsonArr: Array<GtfsAgency>
   ): Promise<Array<GtfsAgencyForNGSIv2>> => {
-    console.log("jsonArr", jsonArr);
     const formattedJsonArr = jsonArr.map(json => {
       // 正規化の参考：https://github.com/smart-data-models/dataModel.UrbanMobility/blob/master/GtfsAgency/schema.json
       const formattedJson: GtfsAgencyForNGSIv2 = {
