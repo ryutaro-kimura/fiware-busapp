@@ -1,4 +1,4 @@
-# sukemane-globe
+# liff-fiware-busapp
 
 ## 起動方法
 前提：envファイルを定義しておくこと
