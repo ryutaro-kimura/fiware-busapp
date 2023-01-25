@@ -1,17 +1,36 @@
 import React, { useState } from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 
-// 佐賀市
-const center = {
-  lat: 35.65224138251394,
-  lng: 139.70450901142888
+const containerStyle = {
+  height: '100vh',
+  width: '100%'
 }
 
+// 佐賀市
+const center = {
+  lat: 33.27020698968795,
+  lng: 130.30862396560102
+}
+
+// const busStop = {
+//   lat: 33.27020698968795,
+//   lng: 130.30862396560102
+// }
+
 const GoogleMapComponent: React.FC = () => {
-  const [pin, setPin] = useState()
-  const containerStyle = {
-    height: '100vh',
-    width: '100%'
+  const [pin, setPin] = useState<google.maps.LatLngLiteral>()
+  const [currentPos, setCurrentPos] = useState<google.maps.LatLngLiteral>()
+
+  const handleOnLoad = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        setCurrentPos(pos)
+      })
+    }
   }
 
   const setLatLng = (props: any) => {
@@ -24,8 +43,9 @@ const GoogleMapComponent: React.FC = () => {
 
   return (
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!}>
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={3} onClick={setLatLng}>
+      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13} onClick={setLatLng} onLoad={handleOnLoad}>
         {pin && <Marker position={pin} />}
+        {currentPos && <Marker position={currentPos} />}
       </GoogleMap>
     </LoadScript>
   )
