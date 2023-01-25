@@ -9,12 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.17.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "amazon-cognito-identity-js": "^5.2.12",
-    "daisyui": "^2.43.2",
     "axios": "^1.2.1",
+    "daisyui": "^2.43.2",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "gtfs-realtime-bindings": "^0.0.6",
@@ -27,11 +28,11 @@
   },
   "devDependencies": {
     "@types/papaparse": "^5.3.5",
+    "@types/request": "^2.48.8",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
-    "tailwindcss": "^3.2.4",
     "request": "^2.88.2",
-    "typescript": "4.8.4",
-    "@types/request": "^2.48.8"
+    "tailwindcss": "^3.2.4",
+    "typescript": "4.8.4"
   }
 }
