@@ -71,17 +71,17 @@ const GoogleMapComponent: React.FC = () => {
         onLoad={handleOnLoad}
       >
         {/* {pin && <Marker position={pin} />} */}
-        {/* {currentPos && <Marker position={currentPos} />} */}
-        {isSelected ? (
+        {currentPos && <Marker position={currentPos} />}
+        <Marker position={busStop1} onClick={() => setSelected(true)} />
+        {isSelected && (
           <InfoWindow position={busStop1} onCloseClick={() => setSelected(false)}>
             <div className="bg-white">
-              <div className=" text-[20px]">佐賀大学正門前</div>
-              <div className="text-[16px]">時刻表を見る</div>
+              <div className=" text-[16px]">佐賀大学正門前</div>
+              <div className="text-[10px]">時刻表を見る</div>
             </div>
           </InfoWindow>
-        ) : (
-          <Marker position={busStop1} onClick={() => setSelected(true)} />
         )}
+
         <Marker position={busStop2} />
         <Marker position={busStop3} />
       </GoogleMap>
