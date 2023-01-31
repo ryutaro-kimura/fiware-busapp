@@ -17,8 +17,8 @@ const MapPage: NextPage<Props> = (props) => {
 export default MapPage
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const gtfsBusStops = await getOrionData('GtfsStop')
-  console.log(gtfsBusStops)
+  const gtfsBusStops: NgsiBusStop[] = await getOrionData('GtfsStop')
+  console.log(gtfsBusStops[1].location.coordinates)
   const props: Props = {
     busStops: gtfsBusStops
   }

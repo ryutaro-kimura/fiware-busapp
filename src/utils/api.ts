@@ -25,33 +25,48 @@ const userData = {
 }
 const cognitoUser = new CognitoUser(userData)
 
-// export type NgsiBusStop = {
-//   id: string
-//   type: string
-//   code: string
-//   name: string
-//   location: {
-//     type: string
-//     corrdinates: number[]
-//   }
-//   operateBy: string[]
-// }
-
 export type NgsiBusStop = {
   id: string
   type: string
-  code: { type: string; value: string; metadata: {} }
+  code: string
+  name: string
   location: {
     type: string
-    value: Object
-    corrdinates: number[]
+    coordinates: number[]
   }
-  name: { type: string; value: number; metadata: {} }
   operateBy: string[]
 }
 
-export const getOrionData = (gtfsModelType: string) => {
-  return new Promise((resolve, reject) => {
+export type NgsiBusStop2 = {
+  id: string
+  type: string
+  code: string
+  name: string
+  location: {
+    type: string
+    coordinates: number[]
+  }
+  operateBy: string[]
+}
+
+// export type NgsiBusStop = {
+//   id: string
+//   type: string
+//   code: { type: string; value: string; metadata: {} }
+//   location: {
+//     type: string
+//     value: Object
+//     corrdinates: number[]
+//   }
+//   name: { type: string; value: number; metadata: {} }
+//   operateBy: string[]
+// }
+
+type GtfsType = 'GtfsStop' | 'GtfsStopTime'
+
+export const getOrionData = (gtfsModelType: GtfsType) => {
+  type NgsiModel = NgsiBusStop[] | NgsiBusStop2[]
+  return new Promise<NgsiModel>((resolve, reject) => {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: async function (result) {
         const accessToken = result.getAccessToken().getJwtToken()

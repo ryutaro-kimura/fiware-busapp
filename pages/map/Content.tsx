@@ -1,14 +1,18 @@
-import { useState } from 'react'
-import GoogleMapComponent from './GoogleMap'
-import { Props } from './index.page'
+import dynamic from 'next/dynamic'
+import { NgsiBusStop } from '../../src/utils/api'
+import GoogleMapComponent from './GoogleMapComponent'
+
+type Props = {
+  busStops: NgsiBusStop[]
+}
 
 export const MapContent: React.FC<Props> = (props) => {
-  const [isGet, setGet] = useState(false)
-
+  // const GoogleMapComponent = dynamic(() => import('./GoogleMapComponent'), {
+  //   ssr: false
+  // })
   return (
     <div>
-      <GoogleMapComponent />
-      {isGet ? <div>{props.FeedEntities}</div> : <button onClick={() => setGet(true)}>表示する</button>}
+      <GoogleMapComponent busStops={props.busStops} />
     </div>
   )
 }
