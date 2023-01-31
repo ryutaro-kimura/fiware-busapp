@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { GoogleMap, InfoWindowF, LoadScript, MarkerF } from '@react-google-maps/api'
 import { NgsiBusStop } from '../../src/utils/api'
 

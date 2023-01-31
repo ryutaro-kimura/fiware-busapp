@@ -1,5 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
 // import { BASE_API_URL } from "../../secrets";
 import AmazonCognitoIdentity, {
   AuthenticationDetails,
