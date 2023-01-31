@@ -1,22 +1,17 @@
-import { useEffect, useState } from 'react'
-import { getGithubId, getOrionData } from '../src/utils/api'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 type Props = { data: Array<string> }
 
 export default function Home({ ...props }: Props) {
-  // getOrionData();
-  const [busEntity, setBusEntity] = useState<number>()
+  const router = useRouter()
   useEffect(() => {
-    getGithubId().then((id) => {
-      setBusEntity(id)
-    })
-  }, [])
+    router.push('/map')
+  }, [router.asPath])
 
   return (
     <>
-      <p>hoge</p>
-      <h1 className="text-3xl text-red-400 font-bold underline">Hello world!</h1>
-      <p>{busEntity}</p>
+      <p>Loading..</p>
     </>
   )
 }
