@@ -46,7 +46,6 @@ const GoogleMapComponent: React.FC<Props> = ({ busStops }) => {
       })
     }
   }
-  console.log(busStops[0].location.coordinates)
 
   return (
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!} onLoad={createOffsetSize}>
@@ -65,7 +64,6 @@ const GoogleMapComponent: React.FC<Props> = ({ busStops }) => {
               fontWeight: '100',
               text: String(busStop.name)
             }
-            console.log(busStop)
 
             return (
               <>
